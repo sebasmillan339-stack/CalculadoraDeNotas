@@ -31,5 +31,23 @@ public class CalculadoraDeNotas {
                 JOptionPane.showMessageDialog(null, "APROBADO");
             }
         }
+
+        double notaLimite = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la nota límite (0.0 a 4.9): "));
+        while (notaLimite < 0.0 || notaLimite > 4.9) {
+            notaLimite = Double.parseDouble(JOptionPane.showInputDialog("Valor inválido. Ingrese la nota límite (0.0 a 4.9): "));
+        }
+        mostrarSuperioresALimite(estudiantes, notaLimite);
+    }
+
+    public static void mostrarSuperioresALimite(Calculadora[] estudiantes, double notaLimite) {
+        String mensaje = "Estudiantes con definitiva superior a " + notaLimite + ":\n";
+        for (int i = 0; i < estudiantes.length; i++) {
+            if (estudiantes[i].getDefinitiva() > notaLimite) {
+                mensaje += "Id: " + estudiantes[i].getId()
+                        + "  Nombre: " + estudiantes[i].getNombre()
+                        + "  Definitiva: " + estudiantes[i].getDefinitiva() + "\n";
+            }
+        }
+        JOptionPane.showMessageDialog(null, mensaje);
     }
 }
