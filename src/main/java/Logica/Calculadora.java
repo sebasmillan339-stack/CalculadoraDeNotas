@@ -41,4 +41,13 @@ public class Calculadora {
     public void mostrarNota(){
         JOptionPane.showMessageDialog(null, "Nombre: " + nombre + "\nCodigo: " + id + "\nNota definitiva: " + definitiva);
     }
+
+    public void incrementarNotaDesarrollo(double cifra) {
+        if (notaDesarrollo + cifra > 5.0) {
+            notaDesarrollo = 5.0;
+        } else {
+            notaDesarrollo = notaDesarrollo + cifra;
+        }
+        calcularDefinitiva();
+    }
 }
