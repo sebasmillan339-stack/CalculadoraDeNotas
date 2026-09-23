@@ -5,24 +5,24 @@
 package vista;
 import logica.Calculadora;
 import javax.swing.JOptionPane;
-
+ 
 public class CalculadoraDeNotas {
-
+ 
     public static void main(String[] args) {
-
+ 
         int numeroEstudiantes = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de estudiantes: "));
         Calculadora[] estudiantes = new Calculadora[numeroEstudiantes];
-
+ 
         for (int i = 0; i < numeroEstudiantes; i++) {
             String nombre = JOptionPane.showInputDialog("Estudiante " + (i + 1) + "\nIngrese su Nombre");
             String id = JOptionPane.showInputDialog("Estudiante " + (i + 1) + "\nIngrese su id");
             double notaDesarrollo = Double.parseDouble(JOptionPane.showInputDialog("digite la nota de Desarrollo"));
             double notaMatematica = Double.parseDouble(JOptionPane.showInputDialog("digite la nota de Matemáticas"));
-
+ 
             estudiantes[i] = new Calculadora(id, nombre, notaDesarrollo, notaMatematica);
             estudiantes[i].calcularDefinitiva();
         }
-
+ 
         for (int i = 0; i < numeroEstudiantes; i++) {
             estudiantes[i].mostrarNota();
             if (estudiantes[i].getDefinitiva() < 3.5) {
@@ -31,20 +31,26 @@ public class CalculadoraDeNotas {
                 JOptionPane.showMessageDialog(null, "APROBADO");
             }
         }
-
+ 
         double notaLimite = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la nota límite (0.0 a 4.9): "));
         while (notaLimite < 0.0 || notaLimite > 4.9) {
             notaLimite = Double.parseDouble(JOptionPane.showInputDialog("Valor inválido. Ingrese la nota límite (0.0 a 4.9): "));
         }
         mostrarSuperioresALimite(estudiantes, notaLimite);
-
+ 
         double cifra = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la cifra de incremento (0.0 a 0.5): "));
         while (cifra < 0.0 || cifra > 0.5) {
             cifra = Double.parseDouble(JOptionPane.showInputDialog("Valor inválido. Ingrese la cifra de incremento (0.0 a 0.5): "));
         }
         incrementarNotasDesarrollo(estudiantes, cifra);
+ 
+        // SOLO PARA VERIFICAR (opcional, no es parte del punto 3):
+        // muestra la nota ya actualizada de cada estudiante despues del incremento.
+        for (int i = 0; i < numeroEstudiantes; i++) {
+            estudiantes[i].mostrarNota();
+        }
     }
-
+ 
     public static void mostrarSuperioresALimite(Calculadora[] estudiantes, double notaLimite) {
         String mensaje = "Estudiantes con definitiva superior a " + notaLimite + ":\n";
         for (int i = 0; i < estudiantes.length; i++) {
@@ -56,7 +62,7 @@ public class CalculadoraDeNotas {
         }
         JOptionPane.showMessageDialog(null, mensaje);
     }
-
+ 
     public static void incrementarNotasDesarrollo(Calculadora[] estudiantes, double cifra) {
         for (int i = 0; i < estudiantes.length; i++) {
             estudiantes[i].incrementarNotaDesarrollo(cifra);
