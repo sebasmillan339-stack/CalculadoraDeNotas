@@ -37,6 +37,12 @@ public class CalculadoraDeNotas {
             notaLimite = Double.parseDouble(JOptionPane.showInputDialog("Valor inválido. Ingrese la nota límite (0.0 a 4.9): "));
         }
         mostrarSuperioresALimite(estudiantes, notaLimite);
+
+        double cifra = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la cifra de incremento (0.0 a 0.5): "));
+        while (cifra < 0.0 || cifra > 0.5) {
+            cifra = Double.parseDouble(JOptionPane.showInputDialog("Valor inválido. Ingrese la cifra de incremento (0.0 a 0.5): "));
+        }
+        incrementarNotasDesarrollo(estudiantes, cifra);
     }
 
     public static void mostrarSuperioresALimite(Calculadora[] estudiantes, double notaLimite) {
@@ -49,5 +55,11 @@ public class CalculadoraDeNotas {
             }
         }
         JOptionPane.showMessageDialog(null, mensaje);
+    }
+
+    public static void incrementarNotasDesarrollo(Calculadora[] estudiantes, double cifra) {
+        for (int i = 0; i < estudiantes.length; i++) {
+            estudiantes[i].incrementarNotaDesarrollo(cifra);
+        }
     }
 }
